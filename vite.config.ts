@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? '/elecciones/' : '/',
+  base: '/elecciones/',
   plugins: [react()],
 })
