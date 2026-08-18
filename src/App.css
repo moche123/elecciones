@@ -6,21 +6,39 @@
   padding: 24px;
 }
 
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  z-index: 10;
+}
+
 .card {
   position: relative;
   width: 100%;
   max-width: 420px;
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 32px 28px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 24px var(--shadow-color);
   text-align: center;
 }
 
 h1 {
   font-size: 1.5rem;
   margin: 0 0 8px;
-  color: #1a1a2e;
+  color: var(--text-primary);
 }
 
 .selector-card {
@@ -60,7 +78,7 @@ h1 {
 }
 
 .subtitle {
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 24px;
 }
 
@@ -75,10 +93,10 @@ h1 {
   padding: 16px;
   font-size: 1rem;
   font-weight: 600;
-  border: 2px solid #16213e;
+  border: 2px solid var(--accent);
   border-radius: 10px;
-  background: #16213e;
-  color: #fff;
+  background: var(--accent);
+  color: var(--accent-text);
   cursor: pointer;
   transition: opacity 0.15s;
 }
@@ -96,20 +114,22 @@ h1 {
 
 .dni-form label {
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .dni-form input {
   padding: 12px 14px;
   font-size: 1.1rem;
   letter-spacing: 1px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--input-border);
   border-radius: 8px;
   outline: none;
+  background: var(--bg-card);
+  color: var(--text-primary);
 }
 
 .dni-form input:focus {
-  border-color: #16213e;
+  border-color: var(--accent);
 }
 
 .search-btn {
@@ -119,13 +139,13 @@ h1 {
   font-weight: 600;
   border: none;
   border-radius: 8px;
-  background: #16213e;
-  color: #fff;
+  background: var(--accent);
+  color: var(--accent-text);
   cursor: pointer;
 }
 
 .search-btn:disabled {
-  background: #ccc;
+  background: var(--btn-disabled-bg);
   cursor: not-allowed;
 }
 
@@ -135,14 +155,14 @@ h1 {
   left: 16px;
   background: none;
   border: none;
-  color: #16213e;
+  color: var(--accent);
   font-weight: 600;
   cursor: pointer;
   font-size: 0.9rem;
 }
 
 .error {
-  color: #c0392b;
+  color: var(--error-color);
   font-size: 0.9rem;
   margin: 4px 0 0;
 }
@@ -167,7 +187,7 @@ h1 {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #888;
+  color: var(--text-muted);
   margin-top: 12px;
 }
 
@@ -175,7 +195,7 @@ h1 {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--text-primary);
   padding-bottom: 6px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }

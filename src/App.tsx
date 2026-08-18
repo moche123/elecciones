@@ -5,6 +5,7 @@ import { readCachedQuery, saveCachedQuery } from './utils/queryCache'
 import { TypeSelector } from './components/TypeSelector'
 import { DniForm } from './components/DniForm'
 import { ResultView } from './components/ResultView'
+import { ThemeToggle } from './components/ThemeToggle'
 import './App.css'
 
 type Step = 'type' | 'dni' | 'result'
@@ -60,6 +61,7 @@ function App() {
 
   return (
     <main className="app-container">
+      <ThemeToggle />
       {step === 'type' && <TypeSelector onSelect={handleSelectType} />}
       {step === 'dni' && personType && (
         <DniForm
