@@ -15,8 +15,6 @@ export function ResultView({ record, onNewQuery }: Props) {
       <img src={logo} alt="Logo INTI" className="img-logo" />
       <h1>Resultado</h1>
       <dl className="details">
-        <dt>Nro</dt>
-        <dd>{record.number}</dd>
 
         <dt>DNI</dt>
         <dd>{record.dni}</dd>
