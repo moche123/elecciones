@@ -23,11 +23,11 @@ h1 {
   color: #1a1a2e;
 }
 
-.card-selector {
+.selector-card {
   max-width: 480px;
 }
 
-.cabecera-imagenes {
+.image-header {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -64,13 +64,13 @@ h1 {
   margin-bottom: 24px;
 }
 
-.opciones {
+.options {
   display: flex;
   gap: 12px;
   justify-content: center;
 }
 
-.btn-opcion {
+.option-btn {
   flex: 1;
   padding: 16px;
   font-size: 1rem;
@@ -83,23 +83,23 @@ h1 {
   transition: opacity 0.15s;
 }
 
-.btn-opcion:hover {
+.option-btn:hover {
   opacity: 0.85;
 }
 
-.form-dni {
+.dni-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   text-align: left;
 }
 
-.form-dni label {
+.dni-form label {
   font-weight: 600;
   color: #333;
 }
 
-.form-dni input {
+.dni-form input {
   padding: 12px 14px;
   font-size: 1.1rem;
   letter-spacing: 1px;
@@ -108,11 +108,11 @@ h1 {
   outline: none;
 }
 
-.form-dni input:focus {
+.dni-form input:focus {
   border-color: #16213e;
 }
 
-.btn-buscar {
+.search-btn {
   margin-top: 8px;
   padding: 14px;
   font-size: 1rem;
@@ -124,12 +124,12 @@ h1 {
   cursor: pointer;
 }
 
-.btn-buscar:disabled {
+.search-btn:disabled {
   background: #ccc;
   cursor: not-allowed;
 }
 
-.btn-volver {
+.back-btn {
   position: absolute;
   top: 16px;
   left: 16px;
@@ -147,23 +147,23 @@ h1 {
   margin: 4px 0 0;
 }
 
-.card-resultado {
+.result-card {
   max-width: 520px;
   text-align: left;
 }
 
-.card-resultado h1 {
+.result-card h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.detalle {
+.details {
   display: grid;
   grid-template-columns: 1fr;
   gap: 4px;
 }
 
-.detalle dt {
+.details dt {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -171,7 +171,7 @@ h1 {
   margin-top: 12px;
 }
 
-.detalle dd {
+.details dd {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;

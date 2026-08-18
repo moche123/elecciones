@@ -1,64 +1,76 @@
 import { useState } from 'react'
-import type { TipoPersona, RegistroPadron } from './types/padron'
-import { PADRON_ELECTORAL } from './data/padron'
-import { SelectorTipo } from './components/SelectorTipo'
-import { FormularioDNI } from './components/FormularioDNI'
-import { ResultadoConsulta } from './components/ResultadoConsulta'
+import type { PersonType, ElectoralRecord } from './types/electoralRecord'
+import { ELECTORAL_REGISTRY } from './data/electoralRegistry'
+import { readCachedQuery, saveCachedQuery } from './utils/queryCache'
+import { TypeSelector } from './components/TypeSelector'
+import { DniForm } from './components/DniForm'
+import { ResultView } from './components/ResultView'
 import './App.css'
 
-type Paso = 'tipo' | 'dni' | 'resultado'
+type Step = 'type' | 'dni' | 'result'
 
 function App() {
-  const [paso, setPaso] = useState<Paso>('tipo')
-  const [tipo, setTipo] = useState<TipoPersona | null>(null)
-  const [registro, setRegistro] = useState<RegistroPadron | null>(null)
+  const [step, setStep] = useState<Step>('type')
+  const [personType, setPersonType] = useState<PersonType | null>(null)
+  const [record, setRecord] = useState<ElectoralRecord | null>(null)
   const [error, setError] = useState<string | undefined>(undefined)
 
-  function handleSelectTipo(t: TipoPersona) {
-    setTipo(t)
+  function handleSelectType(t: PersonType) {
+    setPersonType(t)
     setError(undefined)
-    setPaso('dni')
+    setStep('dni')
   }
 
-  function handleBuscar(dni: string) {
-    const encontrado = PADRON_ELECTORAL.find(
-      (r) => r.dni === dni && r.tipo === tipo,
-    )
-    if (!encontrado) {
-      setError(`No se encontró un registro de ${tipo} con DNI ${dni}.`)
+  function handleSearch(dni: string) {
+    if (!personType) return
+
+    const cached = readCachedQuery(personType, dni)
+    if (cached) {
+      setError(undefined)
+      setRecord(cached)
+      setStep('result')
       return
     }
+
+    const found = ELECTORAL_REGISTRY.find(
+      (r) => r.dni === dni && r.personType === personType,
+    )
+    if (!found) {
+      setError(`No se encontró un registro de ${personType} con DNI ${dni}.`)
+      return
+    }
+    saveCachedQuery(personType, dni, found)
     setError(undefined)
-    setRegistro(encontrado)
-    setPaso('resultado')
+    setRecord(found)
+    setStep('result')
   }
 
-  function volverATipo() {
-    setPaso('tipo')
-    setTipo(null)
+  function goBackToType() {
+    setStep('type')
+    setPersonType(null)
     setError(undefined)
   }
 
-  function nuevaConsulta() {
-    setRegistro(null)
+  function startNewQuery() {
+    setRecord(null)
     setError(undefined)
-    setPaso('tipo')
-    setTipo(null)
+    setStep('type')
+    setPersonType(null)
   }
 
   return (
     <main className="app-container">
-      {paso === 'tipo' && <SelectorTipo onSelect={handleSelectTipo} />}
-      {paso === 'dni' && tipo && (
-        <FormularioDNI
-          tipo={tipo}
-          onBuscar={handleBuscar}
-          onVolver={volverATipo}
+      {step === 'type' && <TypeSelector onSelect={handleSelectType} />}
+      {step === 'dni' && personType && (
+        <DniForm
+          personType={personType}
+          onSearch={handleSearch}
+          onBack={goBackToType}
           error={error}
         />
       )}
-      {paso === 'resultado' && registro && (
-        <ResultadoConsulta registro={registro} onNuevaConsulta={nuevaConsulta} />
+      {step === 'result' && record && (
+        <ResultView record={record} onNewQuery={startNewQuery} />
       )}
     </main>
   )

@@ -1,33 +1,33 @@
 import { useState } from 'react'
-import type { TipoPersona } from '../types/padron'
+import type { PersonType } from '../types/electoralRecord'
 import logo from '../assets/logo.jpg'
 
 interface Props {
-  tipo: TipoPersona
-  onBuscar: (dni: string) => void
-  onVolver: () => void
+  personType: PersonType
+  onSearch: (dni: string) => void
+  onBack: () => void
   error?: string
 }
 
-export function FormularioDNI({ tipo, onBuscar, onVolver, error }: Props) {
+export function DniForm({ personType, onSearch, onBack, error }: Props) {
   const [dni, setDni] = useState('')
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (dni.trim().length > 0) onBuscar(dni.trim())
+    if (dni.trim().length > 0) onSearch(dni.trim())
   }
 
   return (
     <div className="card">
-      <button className="btn-volver" onClick={onVolver}>
+      <button className="back-btn" onClick={onBack}>
         ← Volver
       </button>
       <img src={logo} alt="Logo INTI" className="img-logo" />
       <h1>Consulta de Padrón</h1>
       <p className="subtitle">
-        Condición: <strong>{tipo}</strong>
+        Condición: <strong>{personType}</strong>
       </p>
-      <form onSubmit={handleSubmit} className="form-dni">
+      <form onSubmit={handleSubmit} className="dni-form">
         <label htmlFor="dni">Ingresa tu DNI</label>
         <input
           id="dni"
@@ -40,7 +40,7 @@ export function FormularioDNI({ tipo, onBuscar, onVolver, error }: Props) {
           autoFocus
         />
         {error && <p className="error">{error}</p>}
-        <button type="submit" className="btn-buscar" disabled={dni.length < 8}>
+        <button type="submit" className="search-btn" disabled={dni.length < 8}>
           Buscar
         </button>
       </form>
